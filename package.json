@@ -1,0 +1,15 @@
+{
+  "name": "itz-locking-time",
+  "version": "0.0.1",
+  "description": "Use promise-based non-ipc locks",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "locking",
+    "promise"
+  ],
+  "author": "Maciej Krüger <mkg20001@gmail.com>",
+  "license": "MPL-2.0"
+}
