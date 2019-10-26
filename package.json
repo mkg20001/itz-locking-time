@@ -4,12 +4,15 @@
   "description": "Use promise-based non-ipc locks",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha -A test"
   },
   "keywords": [
     "locking",
     "promise"
   ],
   "author": "Maciej Krüger <mkg20001@gmail.com>",
-  "license": "MPL-2.0"
+  "license": "MPL-2.0",
+  "devDependencies": {
+    "mocha": "^6.2.2"
+  }
 }

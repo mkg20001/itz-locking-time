@@ -68,7 +68,7 @@ function lock () {
     },
     runNext: (id, fnc, t) => {
       if (nextLocks[id]) {
-        return 
+        return
       }
 
       return main.holdLock(id, fnc(), t)
@@ -77,9 +77,9 @@ function lock () {
       if (locks[id]) {
         await main.waitLock(id, false)
       }
-      
-      
-      
+
+
+
     }
   }
 
