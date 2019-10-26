@@ -1,6 +1,6 @@
 {
   "name": "itz-locking-time",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Use promise-based non-ipc locks",
   "main": "index.js",
   "scripts": {
