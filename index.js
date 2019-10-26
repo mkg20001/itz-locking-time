@@ -21,22 +21,6 @@ function lock () {
       if (t && e) { throw e }
       return r
     },
-    holdNextLock: async (id, prom, t) => {
-      nextLocks[id] = prom
-      let e
-      let r
-
-      try {
-        r = await prom
-      } catch (err) {
-        e = err
-      }
-
-      delete nextLocks[id]
-
-      if (t && e) { throw e }
-      return r
-    },
     waitLock: async (id, t) => {
       let e
       let r
@@ -50,36 +34,22 @@ function lock () {
       if (t && e) { throw e }
       return r
     },
-    waitNextLock: async (id, t) => {
-      let e
-      let r
-
-      try {
-        r = await nextLocks[id]
-      } catch (err) {
-        e = err
-      }
-
-      if (t && e) { throw e }
-      return r
-    },
     runOnce: (id, fnc, t) => {
       return locks[id] ? main.waitLock(id, t) : main.holdLock(id, fnc(), t)
     },
-    runNext: (id, fnc, t) => {
-      if (nextLocks[id]) {
-        return
-      }
+    runNext: async (id, fnc, t) => {
+      const idn = `${id}#next`
 
-      return main.holdLock(id, fnc(), t)
+      // either we have a nextLock or the nextLock has moved to lock layer
+      await main.runOnce(idn, (async () => {
+        if (locks[id]) {
+          await main.waitLock(id, false)
+        }
 
+        main.runOnce(id, fnc, t)
+      })(), true)
 
-      if (locks[id]) {
-        await main.waitLock(id, false)
-      }
-
-
-
+      await main.waitLock(id, t)
     }
   }
 
