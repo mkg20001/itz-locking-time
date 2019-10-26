@@ -2,7 +2,6 @@
 
 function lock () {
   const locks = {}
-  const nextLocks = {}
 
   const main = {
     holdLock: async (id, prom, t) => {
